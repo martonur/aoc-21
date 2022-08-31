@@ -18,14 +18,16 @@ class SubmarinePosition:
     def __init__(self) -> None:
         self.depth = 0
         self.horizontal_position = 0
+        self.aim = 0
     
     def update(self, cmd: SubmarineCommand, value: int):
         if cmd == SubmarineCommand.DOWN:
-            self.depth += value
+            self.aim += value
         elif cmd == SubmarineCommand.UP:
-            self.depth -= value
+            self.aim -= value
         elif cmd == SubmarineCommand.FORWARD:
             self.horizontal_position += value
+            self.depth += self.aim * value
     
     def calculate_result(self):
         return self.depth * self.horizontal_position
